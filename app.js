@@ -1,22 +1,8 @@
 // data/tarot_cards.jsonから読み込んだ78枚を保存する一覧です。
 let tarotCards = [];
 
-const chatGptRequest = `【ChatGPTへの依頼】
-
-あなたは恋愛相談に強いタロット占い師です。
-以下の相談内容と3枚のカード結果をもとに、
-相談者へ送る無料恋愛タロット鑑定文を作成してください。
-
-ルール：
-・600〜1000文字程度
-・優しく自然な日本語
-・相談内容にきちんと触れる
-・カード1枚ずつの意味を説明する
-・最後に3枚をまとめた総合鑑定を書く
-・今できるアドバイスを1つ伝える
-・未来を断定しない
-・不安を煽らない
-・そのまま相談者へ送れる文章だけを出力する`;
+const chatGptRequest = `【依頼】
+無料鑑定をお願いします。`;
 
 const consultationInput = document.querySelector("#consultation");
 const drawButton = document.querySelector("#drawButton");
@@ -84,7 +70,7 @@ function createCardResults() {
     });
 }
 
-// 相談内容、カード結果、ChatGPTへの依頼を1つの文章にします。
+// 相談内容、カード結果、短い依頼文を1つの文章にします。
 function createFullResult(consultation, cards) {
   const cardText = cards
     .map(
