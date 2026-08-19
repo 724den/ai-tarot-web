@@ -1,21 +1,5 @@
-// Python版のtarot_cards.jsonを参考にした、3枚分のカードデータです。
-const tarotCards = [
-  {
-    name: "愚者",
-    loveUpright: "新しい恋の始まりや、自由で素直な気持ちを表しています。",
-    loveReversed: "勢いだけで進まず、相手との関係を落ち着いて考えましょう。",
-  },
-  {
-    name: "魔術師",
-    loveUpright: "自分から行動することで、恋が良い方向へ進みそうです。",
-    loveReversed: "言葉だけにならないよう、誠実な行動を心がけましょう。",
-  },
-  {
-    name: "女教皇",
-    loveUpright: "焦らず相手を見つめることで、深い信頼が育ちそうです。",
-    loveReversed: "考えすぎや心の閉ざしすぎに注意し、素直な気持ちを大切にしましょう。",
-  },
-];
+// data/tarot_cards.jsonから読み込んだ78枚を保存する一覧です。
+let tarotCards = [];
 
 const chatGptRequest = `【ChatGPTへの依頼】
 
@@ -42,6 +26,36 @@ const copyButton = document.querySelector("#copyButton");
 const copyMessage = document.querySelector("#copyMessage");
 const inputMessage = document.querySelector("#inputMessage");
 const characterCount = document.querySelector("#characterCount");
+
+// Python版と共通のJSONファイルから、78枚のカードを読み込みます。
+async function loadTarotCards() {
+  try {
+    const response = await fetch("tarot_cards.json");
+
+    if (!response.ok) {
+      throw new Error("カードデータを取得できませんでした");
+    }
+
+    const cards = await response.json();
+
+    if (!Array.isArray(cards) || cards.length !== 78) {
+      throw new Error("カードデータが78枚ではありません");
+    }
+
+    tarotCards = cards.map((card) => ({
+      name: card.name_ja,
+      loveUpright: card.love_upright,
+      loveReversed: card.love_reversed,
+    }));
+
+    drawButton.disabled = false;
+    drawButton.textContent = "✦ 3枚引く";
+  } catch (error) {
+    drawButton.textContent = "カードを読み込めませんでした";
+    inputMessage.textContent = "ローカルサーバーからページを開き直してください";
+    inputMessage.classList.add("error");
+  }
+}
 
 // 元の配列を壊さず、カードの順番をランダムに並べ替えます。
 function shuffleCards(cards) {
@@ -158,3 +172,5 @@ copyButton.addEventListener("click", async () => {
     copyMessage.textContent = "コピーできませんでした。結果を長押ししてコピーしてください。";
   }
 });
+
+loadTarotCards();

@@ -227,6 +227,12 @@ textarea:focus {
   filter: brightness(1.08);
 }
 
+.primary-button:disabled {
+  cursor: wait;
+  opacity: 0.58;
+  filter: none;
+}
+
 .primary-button:active,
 .copy-button:active {
   transform: translateY(1px) scale(0.995);
