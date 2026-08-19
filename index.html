@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="恋愛相談と3枚のタロットカード結果をChatGPT用にまとめるWebツールです。">
+    <title>恋愛タロット 3カードリーディング</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <p class="eyebrow">AI TAROT · THREE CARD READING</p>
+        <h1>恋の問いに、<br><span>3枚の光を。</span></h1>
+        <p class="hero-text">
+          LINEで届いた相談文を貼り付けると、ChatGPTへ渡せる形に整えてカードを引きます。
+        </p>
+      </header>
+
+      <main>
+        <section class="panel input-panel" aria-labelledby="input-title">
+          <div class="section-heading">
+            <div>
+              <p class="step-label">STEP 1</p>
+              <h2 id="input-title">相談内容を貼り付ける</h2>
+            </div>
+            <span class="private-note">保存・送信なし</span>
+          </div>
+
+          <label for="consultation">LINEから届いた恋愛相談</label>
+          <textarea
+            id="consultation"
+            rows="9"
+            placeholder="ここに相談文を貼り付けてください。&#10;&#10;例：最近、気になる相手からの連絡が減りました。相手の気持ちと、これからどう接すればよいか知りたいです。"
+          ></textarea>
+          <div class="input-meta">
+            <span id="inputMessage" role="status" aria-live="polite">相談文を入力してください</span>
+            <span id="characterCount">0文字</span>
+          </div>
+
+          <button id="drawButton" class="primary-button" type="button">
+            <span class="button-symbol" aria-hidden="true">✦</span>
+            3枚引く
+          </button>
+        </section>
+
+        <section id="resultSection" class="panel result-panel" aria-labelledby="result-title" hidden>
+          <div class="section-heading">
+            <div>
+              <p class="step-label">STEP 2</p>
+              <h2 id="result-title">カード結果</h2>
+            </div>
+            <span class="result-mark" aria-hidden="true">☾</span>
+          </div>
+
+          <pre id="resultText" class="result-text" tabindex="0"></pre>
+
+          <button id="copyButton" class="copy-button" type="button">
+            ChatGPT用にコピー
+          </button>
+          <p id="copyMessage" class="copy-message" role="status" aria-live="polite"></p>
+        </section>
+      </main>
+
+      <footer>
+        <p>入力内容はブラウザ内でのみ処理され、外部へ送信されません。</p>
+      </footer>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

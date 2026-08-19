@@ -1,0 +1,346 @@
+:root {
+  --ink: #f7f2e7;
+  --muted: #b9b2c8;
+  --night: #100d1c;
+  --night-soft: #1b162b;
+  --panel: rgba(31, 25, 48, 0.88);
+  --line: rgba(220, 190, 124, 0.22);
+  --gold: #e2bd6f;
+  --gold-bright: #f3d792;
+  --berry: #8f5576;
+  --danger: #ffb8bd;
+  --shadow: 0 24px 60px rgba(3, 2, 10, 0.42);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink);
+  font-family: "Yu Gothic UI", "Hiragino Sans", "Noto Sans JP", sans-serif;
+  background:
+    radial-gradient(circle at 12% 8%, rgba(143, 85, 118, 0.22), transparent 33rem),
+    radial-gradient(circle at 90% 30%, rgba(81, 71, 132, 0.2), transparent 30rem),
+    var(--night);
+}
+
+body::before {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  content: "";
+  opacity: 0.16;
+  background-image: radial-gradient(circle, #fff 0.7px, transparent 0.8px);
+  background-size: 31px 31px;
+}
+
+button,
+textarea {
+  font: inherit;
+}
+
+button {
+  touch-action: manipulation;
+}
+
+.page-shell {
+  width: min(100% - 32px, 760px);
+  margin: 0 auto;
+  padding: 56px 0 32px;
+}
+
+.hero {
+  padding: 16px 4px 36px;
+}
+
+.eyebrow,
+.step-label {
+  margin: 0 0 12px;
+  color: var(--gold);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+h1,
+h2,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  max-width: 650px;
+  margin-bottom: 20px;
+  font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+  font-size: clamp(2.55rem, 8vw, 5.15rem);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.04em;
+}
+
+h1 span {
+  color: var(--gold-bright);
+}
+
+.hero-text {
+  max-width: 590px;
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.9;
+}
+
+main {
+  display: grid;
+  gap: 24px;
+}
+
+.panel {
+  position: relative;
+  overflow: hidden;
+  padding: 30px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
+}
+
+.panel::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 120px;
+  height: 120px;
+  border-radius: 0 0 0 100%;
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(225deg, rgba(226, 189, 111, 0.12), transparent 72%);
+}
+
+.section-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 26px;
+}
+
+.section-heading h2 {
+  margin: 0;
+  font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+  font-size: clamp(1.35rem, 4vw, 1.75rem);
+  font-weight: 600;
+}
+
+.private-note {
+  flex: 0 0 auto;
+  padding: 7px 10px;
+  border: 1px solid rgba(185, 178, 200, 0.22);
+  border-radius: 99px;
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+textarea {
+  display: block;
+  width: 100%;
+  min-height: 220px;
+  resize: vertical;
+  padding: 18px;
+  border: 1px solid rgba(247, 242, 231, 0.13);
+  border-radius: 15px;
+  outline: none;
+  color: var(--ink);
+  line-height: 1.8;
+  background: rgba(8, 6, 16, 0.5);
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+textarea::placeholder {
+  color: #878092;
+}
+
+textarea:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 4px rgba(226, 189, 111, 0.1);
+}
+
+.input-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 24px;
+  margin: 9px 2px 20px;
+  color: var(--muted);
+  font-size: 0.76rem;
+}
+
+.input-meta .error {
+  color: var(--danger);
+}
+
+.primary-button,
+.copy-button {
+  width: 100%;
+  min-height: 56px;
+  border: 0;
+  border-radius: 15px;
+  cursor: pointer;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  transition: transform 160ms ease, filter 160ms ease;
+}
+
+.primary-button {
+  color: #1b1420;
+  background: linear-gradient(135deg, var(--gold-bright), #c99f4d);
+  box-shadow: 0 12px 30px rgba(174, 126, 50, 0.22);
+}
+
+.copy-button {
+  margin-top: 22px;
+  border: 1px solid rgba(226, 189, 111, 0.55);
+  color: var(--gold-bright);
+  background: rgba(226, 189, 111, 0.08);
+}
+
+.primary-button:hover,
+.copy-button:hover {
+  filter: brightness(1.08);
+}
+
+.primary-button:active,
+.copy-button:active {
+  transform: translateY(1px) scale(0.995);
+}
+
+.primary-button:focus-visible,
+.copy-button:focus-visible {
+  outline: 3px solid rgba(243, 215, 146, 0.45);
+  outline-offset: 3px;
+}
+
+.button-symbol {
+  margin-right: 9px;
+}
+
+.result-panel {
+  border-color: rgba(226, 189, 111, 0.34);
+}
+
+.result-mark {
+  color: var(--gold-bright);
+  font-family: Georgia, serif;
+  font-size: 2rem;
+}
+
+.result-text {
+  overflow-x: auto;
+  margin: 0;
+  padding: 22px;
+  border: 1px solid rgba(247, 242, 231, 0.1);
+  border-radius: 15px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  color: #eee9f2;
+  font-family: "Yu Gothic UI", "Hiragino Sans", sans-serif;
+  font-size: 0.94rem;
+  line-height: 1.85;
+  background: rgba(8, 6, 16, 0.44);
+}
+
+.copy-message {
+  min-height: 24px;
+  margin: 10px 0 0;
+  color: var(--gold-bright);
+  text-align: center;
+  font-size: 0.82rem;
+}
+
+footer {
+  padding: 26px 4px 0;
+  color: #857e91;
+  text-align: center;
+  font-size: 0.76rem;
+  line-height: 1.7;
+}
+
+footer p {
+  margin-bottom: 0;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+@media (max-width: 560px) {
+  .page-shell {
+    width: min(100% - 24px, 760px);
+    padding-top: 28px;
+  }
+
+  .hero {
+    padding: 12px 2px 26px;
+  }
+
+  .hero-text {
+    font-size: 0.92rem;
+    line-height: 1.8;
+  }
+
+  .panel {
+    padding: 21px 16px;
+    border-radius: 19px;
+  }
+
+  .section-heading {
+    margin-bottom: 22px;
+  }
+
+  .private-note {
+    padding: 6px 8px;
+    font-size: 0.67rem;
+  }
+
+  textarea {
+    min-height: 240px;
+    padding: 15px;
+    font-size: 16px;
+  }
+
+  .result-text {
+    padding: 16px 14px;
+    font-size: 0.88rem;
+    line-height: 1.8;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+}
