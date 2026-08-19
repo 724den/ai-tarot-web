@@ -3,26 +3,56 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="恋愛相談と3枚のタロットカード結果をChatGPT用にまとめるWebツールです。">
-    <title>恋愛タロット 3カードリーディング</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="無料3枚引きと、数秘を含む詳細7枚引きに対応した恋愛タロットツールです。">
+    <title>恋愛タロットリーディング</title>
+    <link rel="stylesheet" href="style.css?v=2">
   </head>
   <body>
     <div class="page-shell">
       <header class="hero">
-        <p class="eyebrow">AI TAROT · THREE CARD READING</p>
-        <h1>恋の問いに、<br><span>3枚の光を。</span></h1>
+        <p class="eyebrow">AI TAROT · LOVE READING</p>
+        <h1>恋の問いに、<br><span>カードの光を。</span></h1>
         <p class="hero-text">
-          LINEで届いた相談文を貼り付けると、ChatGPTへ渡せる形に整えてカードを引きます。
+          無料3枚引きと、ライフパスを含む詳細7枚引きを、相談内容に合わせて選べます。
         </p>
       </header>
 
       <main>
-        <section class="panel input-panel" aria-labelledby="input-title">
+        <nav class="mode-switch" aria-label="鑑定モード" role="tablist">
+          <button
+            id="freeModeButton"
+            class="mode-button is-active"
+            type="button"
+            role="tab"
+            aria-selected="true"
+            aria-controls="freePanel"
+          >
+            <span>無料</span>
+            3枚引き
+          </button>
+          <button
+            id="detailedModeButton"
+            class="mode-button"
+            type="button"
+            role="tab"
+            aria-selected="false"
+            aria-controls="detailedPanel"
+          >
+            <span>有料</span>
+            詳細7枚＋数秘
+          </button>
+        </nav>
+
+        <section
+          id="freePanel"
+          class="panel input-panel"
+          role="tabpanel"
+          aria-labelledby="freeModeButton"
+        >
           <div class="section-heading">
             <div>
-              <p class="step-label">STEP 1</p>
-              <h2 id="input-title">相談内容を貼り付ける</h2>
+              <p class="step-label">FREE READING</p>
+              <h2>相談内容を貼り付ける</h2>
             </div>
             <span class="private-note">保存・送信なし</span>
           </div>
@@ -43,11 +73,74 @@
           </button>
         </section>
 
+        <section
+          id="detailedPanel"
+          class="panel input-panel detailed-panel"
+          role="tabpanel"
+          aria-labelledby="detailedModeButton"
+          hidden
+        >
+          <div class="section-heading">
+            <div>
+              <p class="step-label">DETAILED READING</p>
+              <h2>詳細鑑定の情報を入力</h2>
+            </div>
+            <span class="private-note">7枚＋数秘</span>
+          </div>
+
+          <form id="detailedForm">
+            <div class="form-grid">
+              <div class="field">
+                <label for="nickname">ニックネーム <span class="required">必須</span></label>
+                <input id="nickname" name="nickname" type="text" autocomplete="name" required>
+              </div>
+
+              <div class="field">
+                <label for="relationship">相手との関係 <span class="required">必須</span></label>
+                <input
+                  id="relationship"
+                  name="relationship"
+                  type="text"
+                  placeholder="例：片思い、交際中、復縁希望"
+                  required
+                >
+              </div>
+
+              <div class="field full-width">
+                <label for="mainQuestion">一番知りたいこと <span class="required">必須</span></label>
+                <textarea id="mainQuestion" name="mainQuestion" rows="4" required></textarea>
+              </div>
+
+              <div class="field full-width">
+                <label for="recentSituation">最近の状況 <span class="required">必須</span></label>
+                <textarea id="recentSituation" name="recentSituation" rows="4" required></textarea>
+              </div>
+
+              <div class="field">
+                <label for="consultantBirthdate">相談者の生年月日 <span class="required">必須</span></label>
+                <input id="consultantBirthdate" name="consultantBirthdate" type="date" required>
+              </div>
+
+              <div class="field">
+                <label for="partnerBirthdate">相手の生年月日 <span class="optional">任意</span></label>
+                <input id="partnerBirthdate" name="partnerBirthdate" type="date">
+                <p class="field-note">不明な場合は空欄で進められます</p>
+              </div>
+            </div>
+
+            <p id="detailedInputMessage" class="form-message" role="status" aria-live="polite"></p>
+
+            <button id="detailedDrawButton" class="primary-button detailed-button" type="submit" disabled>
+              カードを読み込み中…
+            </button>
+          </form>
+        </section>
+
         <section id="resultSection" class="panel result-panel" aria-labelledby="result-title" hidden>
           <div class="section-heading">
             <div>
-              <p class="step-label">STEP 2</p>
-              <h2 id="result-title">カード結果</h2>
+              <p id="resultStepLabel" class="step-label">READING RESULT</p>
+              <h2 id="result-title">鑑定結果</h2>
             </div>
             <span class="result-mark" aria-hidden="true">☾</span>
           </div>
@@ -66,6 +159,6 @@
       </footer>
     </div>
 
-    <script src="app.js?v=2"></script>
+    <script src="app.js?v=3"></script>
   </body>
 </html>

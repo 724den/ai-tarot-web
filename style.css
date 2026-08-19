@@ -44,6 +44,7 @@ body::before {
 }
 
 button,
+input,
 textarea {
   font: inherit;
 }
@@ -105,6 +106,53 @@ main {
   gap: 24px;
 }
 
+.mode-switch {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  padding: 7px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: rgba(20, 16, 33, 0.86);
+  box-shadow: 0 16px 35px rgba(3, 2, 10, 0.25);
+}
+
+.mode-button {
+  min-height: 64px;
+  padding: 10px 12px;
+  border: 1px solid transparent;
+  border-radius: 13px;
+  color: var(--muted);
+  cursor: pointer;
+  font-weight: 800;
+  line-height: 1.35;
+  background: transparent;
+  transition: color 160ms ease, background 160ms ease, border-color 160ms ease;
+}
+
+.mode-button span {
+  display: block;
+  margin-bottom: 2px;
+  color: #8f879e;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+}
+
+.mode-button.is-active {
+  border-color: rgba(226, 189, 111, 0.35);
+  color: #1b1420;
+  background: linear-gradient(135deg, var(--gold-bright), #c99f4d);
+}
+
+.mode-button.is-active span {
+  color: rgba(27, 20, 32, 0.68);
+}
+
+.mode-button:focus-visible {
+  outline: 3px solid rgba(243, 215, 146, 0.4);
+  outline-offset: 3px;
+}
+
 .panel {
   position: relative;
   overflow: hidden;
@@ -159,28 +207,87 @@ label {
   font-weight: 700;
 }
 
+input,
 textarea {
   display: block;
   width: 100%;
-  min-height: 220px;
-  resize: vertical;
-  padding: 18px;
   border: 1px solid rgba(247, 242, 231, 0.13);
   border-radius: 15px;
   outline: none;
   color: var(--ink);
-  line-height: 1.8;
   background: rgba(8, 6, 16, 0.5);
   transition: border-color 160ms ease, box-shadow 160ms ease;
 }
 
+input {
+  min-height: 54px;
+  padding: 12px 15px;
+  color-scheme: dark;
+}
+
+textarea {
+  min-height: 220px;
+  resize: vertical;
+  padding: 18px;
+  line-height: 1.8;
+}
+
+input::placeholder,
 textarea::placeholder {
   color: #878092;
 }
 
+input:focus,
 textarea:focus {
   border-color: var(--gold);
   box-shadow: 0 0 0 4px rgba(226, 189, 111, 0.1);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px 16px;
+}
+
+.field.full-width {
+  grid-column: 1 / -1;
+}
+
+.field textarea {
+  min-height: 126px;
+}
+
+.required,
+.optional {
+  margin-left: 5px;
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+
+.required {
+  color: var(--gold-bright);
+}
+
+.optional {
+  color: var(--muted);
+}
+
+.field-note {
+  margin: 7px 2px 0;
+  color: var(--muted);
+  font-size: 0.72rem;
+  line-height: 1.6;
+}
+
+.form-message {
+  min-height: 24px;
+  margin: 14px 2px 6px;
+  color: var(--danger);
+  font-size: 0.78rem;
+}
+
+.detailed-button {
+  margin-top: 8px;
 }
 
 .input-meta {
@@ -317,6 +424,26 @@ footer p {
     border-radius: 19px;
   }
 
+  .mode-switch {
+    gap: 6px;
+    padding: 6px;
+  }
+
+  .mode-button {
+    min-height: 62px;
+    padding-inline: 6px;
+    font-size: 0.88rem;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .field.full-width {
+    grid-column: auto;
+  }
+
   .section-heading {
     margin-bottom: 22px;
   }
@@ -326,10 +453,18 @@ footer p {
     font-size: 0.67rem;
   }
 
+  input,
   textarea {
+    font-size: 16px;
+  }
+
+  #consultation {
     min-height: 240px;
     padding: 15px;
-    font-size: 16px;
+  }
+
+  .field textarea {
+    min-height: 142px;
   }
 
   .result-text {
