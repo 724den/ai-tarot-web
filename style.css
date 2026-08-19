@@ -286,6 +286,27 @@ textarea:focus {
   font-size: 0.78rem;
 }
 
+.paste-label {
+  margin-bottom: 8px;
+  font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+  font-size: 1.08rem;
+}
+
+.paste-help {
+  margin-bottom: 14px;
+  color: var(--muted);
+  font-size: 0.8rem;
+  line-height: 1.75;
+}
+
+#purchasedConsultation {
+  min-height: 360px;
+}
+
+.paid-input-meta {
+  margin-bottom: 14px;
+}
+
 .detailed-button {
   margin-top: 8px;
 }
@@ -465,6 +486,10 @@ footer p {
 
   .field textarea {
     min-height: 142px;
+  }
+
+  #purchasedConsultation {
+    min-height: 380px;
   }
 
   .result-text {
