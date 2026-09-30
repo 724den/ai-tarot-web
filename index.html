@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="無料3枚引きと、数秘を含む詳細7枚引きに対応した恋愛タロットツールです。">
     <title>恋愛タロットリーディング</title>
-    <link rel="stylesheet" href="style.css?v=4">
+    <link rel="stylesheet" href="style.css?v=5">
   </head>
   <body>
     <div class="page-shell">
@@ -27,8 +27,30 @@
             aria-selected="true"
             aria-controls="freePanel"
           >
-            <span>無料</span>
-            3枚引き
+            <span>無料①</span>
+            相手の気持ちを見る鑑定
+          </button>
+          <button
+            id="freeSelfModeButton"
+            class="mode-button"
+            type="button"
+            role="tab"
+            aria-selected="false"
+            aria-controls="freeSelfPanel"
+          >
+            <span>無料②</span>
+            今のあなたを見る鑑定
+          </button>
+          <button
+            id="freeBothModeButton"
+            class="mode-button"
+            type="button"
+            role="tab"
+            aria-selected="false"
+            aria-controls="freeBothPanel"
+          >
+            <span>無料③</span>
+            両方を見る鑑定
           </button>
           <button
             id="detailedModeButton"
@@ -38,8 +60,41 @@
             aria-selected="false"
             aria-controls="detailedPanel"
           >
-            <span>有料鑑定</span>
+            <span>有料①</span>
             相手の本音・詳細恋愛鑑定
+          </button>
+          <button
+            id="futureLoveModeButton"
+            class="mode-button"
+            type="button"
+            role="tab"
+            aria-selected="false"
+            aria-controls="futureLovePanel"
+          >
+            <span>有料②</span>
+            二人の未来・総合恋愛鑑定
+          </button>
+          <button
+            id="currentSelfModeButton"
+            class="mode-button"
+            type="button"
+            role="tab"
+            aria-selected="false"
+            aria-controls="currentSelfPanel"
+          >
+            <span>有料③</span>
+            今のあなた・詳細恋愛鑑定
+          </button>
+          <button
+            id="futureSelfModeButton"
+            class="mode-button"
+            type="button"
+            role="tab"
+            aria-selected="false"
+            aria-controls="futureSelfPanel"
+          >
+            <span>有料④</span>
+            あなたの未来・総合鑑定
           </button>
         </nav>
 
@@ -51,26 +106,226 @@
         >
           <div class="section-heading">
             <div>
-              <p class="step-label">FREE READING</p>
-              <h2>相談内容を貼り付ける</h2>
+              <p class="step-label">FREE READING ①</p>
+              <h2>相手の気持ちを見る鑑定</h2>
             </div>
-            <span class="private-note">保存・送信なし</span>
+            <span class="private-note">タロット3枚</span>
           </div>
 
-          <label for="consultation">LINEから届いた恋愛相談</label>
-          <textarea
-            id="consultation"
-            rows="9"
-            placeholder="ここに相談文を貼り付けてください。&#10;&#10;例：最近、気になる相手からの連絡が減りました。相手の気持ちと、これからどう接すればよいか知りたいです。"
-          ></textarea>
-          <div class="input-meta">
-            <span id="inputMessage" role="status" aria-live="polite">相談文を入力してください</span>
-            <span id="characterCount">0文字</span>
+          <form id="freeFeelingsForm">
+            <label class="paste-label" for="consultation">LINEの回答をここへ貼り付ける</label>
+            <p class="paste-help">①〜④を含む回答全文を、そのままコピーして貼り付けてください。</p>
+            <textarea
+              id="consultation"
+              class="free-structured-consultation"
+              rows="13"
+              aria-describedby="inputMessage"
+              placeholder="① ニックネーム：あや&#10;② お相手との関係：片思い&#10;③ 今いちばん知りたいこと：相手の気持ち&#10;④ 最近の状況：最近、連絡が少なくなりました"
+            ></textarea>
+            <div class="input-meta">
+              <span id="inputMessage" role="status" aria-live="polite">4項目を自動で読み取ります</span>
+              <span id="characterCount">0文字</span>
+            </div>
+
+            <button id="drawButton" class="primary-button" type="submit" disabled>
+              カードを読み込み中…
+            </button>
+          </form>
+        </section>
+
+        <section
+          id="freeSelfPanel"
+          class="panel input-panel"
+          role="tabpanel"
+          aria-labelledby="freeSelfModeButton"
+          hidden
+        >
+          <div class="section-heading">
+            <div>
+              <p class="step-label">FREE READING ②</p>
+              <h2>今のあなたを見る鑑定</h2>
+            </div>
+            <span class="private-note">タロット3枚</span>
           </div>
 
-          <button id="drawButton" class="primary-button" type="button" disabled>
-            カードを読み込み中…
-          </button>
+          <form id="freeSelfForm">
+            <label class="paste-label" for="freeSelfConsultation">LINEの回答をここへ貼り付ける</label>
+            <p class="paste-help">①〜④を含む回答全文を、そのままコピーして貼り付けてください。</p>
+            <textarea
+              id="freeSelfConsultation"
+              class="free-structured-consultation"
+              rows="13"
+              aria-describedby="freeSelfInputMessage"
+              placeholder="① ニックネーム：あや&#10;② 今いちばん悩んでいること：恋愛に自信が持てません&#10;③ 最近、気持ちや状況にどんな変化があったか：新しい出会いがありました&#10;④ これからどうなっていきたいか：自分らしく恋愛したいです"
+            ></textarea>
+            <div class="input-meta">
+              <span id="freeSelfInputMessage" role="status" aria-live="polite">4項目を自動で読み取ります</span>
+              <span id="freeSelfCharacterCount">0文字</span>
+            </div>
+
+            <button id="freeSelfDrawButton" class="primary-button" type="submit" disabled>
+              カードを読み込み中…
+            </button>
+          </form>
+        </section>
+
+        <section
+          id="freeBothPanel"
+          class="panel input-panel"
+          role="tabpanel"
+          aria-labelledby="freeBothModeButton"
+          hidden
+        >
+          <div class="section-heading">
+            <div>
+              <p class="step-label">FREE READING ③</p>
+              <h2>両方を見る鑑定</h2>
+            </div>
+            <span class="private-note">タロット3枚</span>
+          </div>
+
+          <form id="freeBothForm">
+            <label class="paste-label" for="freeBothConsultation">LINEの回答をここへ貼り付ける</label>
+            <p class="paste-help">①〜⑤を含む回答全文を、そのままコピーして貼り付けてください。</p>
+            <textarea
+              id="freeBothConsultation"
+              class="free-structured-consultation"
+              rows="15"
+              aria-describedby="freeBothInputMessage"
+              placeholder="① ニックネーム：あや&#10;② お相手との関係：片思い&#10;③ 今いちばん知りたいこと：相手の気持ちと今後&#10;④ 最近の状況：最近、連絡が少なくなりました&#10;⑤ 最近、ご自身の気持ちや環境に変化があれば教えてください：仕事が忙しく不安になりやすいです"
+            ></textarea>
+            <div class="input-meta">
+              <span id="freeBothInputMessage" role="status" aria-live="polite">5項目を自動で読み取ります</span>
+              <span id="freeBothCharacterCount">0文字</span>
+            </div>
+
+            <button id="freeBothDrawButton" class="primary-button" type="submit" disabled>
+              カードを読み込み中…
+            </button>
+          </form>
+        </section>
+
+        <section
+          id="futureLovePanel"
+          class="panel input-panel detailed-panel"
+          role="tabpanel"
+          aria-labelledby="futureLoveModeButton"
+          hidden
+        >
+          <div class="section-heading">
+            <div>
+              <p class="step-label">PREMIUM READING ②</p>
+              <h2>二人の未来・総合恋愛鑑定</h2>
+            </div>
+            <span class="private-note">10枚＋詳細数秘</span>
+          </div>
+
+          <form id="futureLoveForm">
+            <label class="paste-label" for="futureLoveConsultation">
+              購入後に届いた相談内容をここへ貼り付ける
+            </label>
+            <p class="paste-help">
+              ①〜⑩を含むLINEの回答全文を、そのままコピーして貼り付けてください。お相手の生年月日は「不明」でも進められます。
+            </p>
+            <textarea
+              id="futureLoveConsultation"
+              class="structured-consultation"
+              rows="26"
+              aria-describedby="futureLoveInputMessage"
+              placeholder="① BASEで購入したお名前：山田花子&#10;② ニックネーム：あや&#10;③ お相手との関係：交際中&#10;④ 今いちばん知りたいこと：二人の今後&#10;⑤ 最近の状況：最近すれ違いが増えました&#10;⑥ あなたの生年月日：1992/05/18&#10;⑦ お相手の生年月日：不明&#10;⑧ これまでの経緯：職場で知り合い交際を始めました&#10;⑨ お相手の最近の具体的な言動：将来の話を避けるようになりました&#10;⑩ 今後、お相手とどうなっていきたいか：安心できる関係を築きたいです"
+            ></textarea>
+
+            <div class="input-meta paid-input-meta">
+              <span id="futureLoveInputMessage" role="status" aria-live="polite">10項目を自動で読み取ります</span>
+              <span id="futureLoveCharacterCount">0文字</span>
+            </div>
+
+            <button id="futureLoveDrawButton" class="primary-button detailed-button" type="submit" disabled>
+              カードを読み込み中…
+            </button>
+          </form>
+        </section>
+
+        <section
+          id="currentSelfPanel"
+          class="panel input-panel detailed-panel"
+          role="tabpanel"
+          aria-labelledby="currentSelfModeButton"
+          hidden
+        >
+          <div class="section-heading">
+            <div>
+              <p class="step-label">PREMIUM READING ③</p>
+              <h2>今のあなた・詳細恋愛鑑定</h2>
+            </div>
+            <span class="private-note">7枚＋数秘</span>
+          </div>
+
+          <form id="currentSelfForm">
+            <label class="paste-label" for="currentSelfConsultation">
+              購入後に届いた相談内容をここへ貼り付ける
+            </label>
+            <p class="paste-help">
+              ①〜⑦を含むLINEの回答全文を、そのままコピーして貼り付けてください。
+            </p>
+            <textarea
+              id="currentSelfConsultation"
+              class="structured-consultation"
+              rows="20"
+              aria-describedby="currentSelfInputMessage"
+              placeholder="① BASEで購入したお名前：山田花子&#10;② ニックネーム：あや&#10;③ 今いちばん悩んでいること：恋愛に自信が持てません&#10;④ 最近、気持ちや状況にどんな変化があったか：新しい出会いがありました&#10;⑤ これからどうなっていきたいか：自分らしく恋愛したいです&#10;⑥ あなたの生年月日：1992/05/18&#10;⑦ 補足したいこと：過去の恋愛を引きずっています"
+            ></textarea>
+
+            <div class="input-meta paid-input-meta">
+              <span id="currentSelfInputMessage" role="status" aria-live="polite">7項目を自動で読み取ります</span>
+              <span id="currentSelfCharacterCount">0文字</span>
+            </div>
+
+            <button id="currentSelfDrawButton" class="primary-button detailed-button" type="submit" disabled>
+              カードを読み込み中…
+            </button>
+          </form>
+        </section>
+
+        <section
+          id="futureSelfPanel"
+          class="panel input-panel detailed-panel"
+          role="tabpanel"
+          aria-labelledby="futureSelfModeButton"
+          hidden
+        >
+          <div class="section-heading">
+            <div>
+              <p class="step-label">PREMIUM READING ④</p>
+              <h2>あなたの未来・総合鑑定</h2>
+            </div>
+            <span class="private-note">10枚＋詳細数秘</span>
+          </div>
+
+          <form id="futureSelfForm">
+            <label class="paste-label" for="futureSelfConsultation">
+              購入後に届いた相談内容をここへ貼り付ける
+            </label>
+            <p class="paste-help">
+              ①〜⑧を含むLINEの回答全文を、そのままコピーして貼り付けてください。
+            </p>
+            <textarea
+              id="futureSelfConsultation"
+              class="structured-consultation"
+              rows="22"
+              aria-describedby="futureSelfInputMessage"
+              placeholder="① BASEで購入したお名前：山田花子&#10;② ニックネーム：あや&#10;③ 今いちばん悩んでいること：今後の方向性に迷っています&#10;④ 最近、気持ちや状況にどんな変化があったか：環境を変えたい気持ちが強くなりました&#10;⑤ 今後について特に知りたいこと：仕事と恋愛の流れを知りたいです&#10;⑥ これからどうなっていきたいか：自分らしく前向きに進みたいです&#10;⑦ あなたの生年月日：1992/05/18&#10;⑧ 補足したいこと：転職も検討しています"
+            ></textarea>
+
+            <div class="input-meta paid-input-meta">
+              <span id="futureSelfInputMessage" role="status" aria-live="polite">8項目を自動で読み取ります</span>
+              <span id="futureSelfCharacterCount">0文字</span>
+            </div>
+
+            <button id="futureSelfDrawButton" class="primary-button detailed-button" type="submit" disabled>
+              カードを読み込み中…
+            </button>
+          </form>
         </section>
 
         <section
@@ -136,6 +391,6 @@
       </footer>
     </div>
 
-    <script src="app.js?v=5"></script>
+    <script src="app.js?v=7"></script>
   </body>
 </html>

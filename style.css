@@ -299,8 +299,13 @@ textarea:focus {
   line-height: 1.75;
 }
 
-#purchasedConsultation {
+#purchasedConsultation,
+.structured-consultation {
   min-height: 560px;
+}
+
+.free-structured-consultation {
+  min-height: 310px;
 }
 
 .paid-input-meta {
@@ -446,6 +451,7 @@ footer p {
   }
 
   .mode-switch {
+    grid-template-columns: 1fr;
     gap: 6px;
     padding: 6px;
   }
@@ -479,8 +485,8 @@ footer p {
     font-size: 16px;
   }
 
-  #consultation {
-    min-height: 240px;
+  .free-structured-consultation {
+    min-height: 280px;
     padding: 15px;
   }
 
@@ -488,7 +494,8 @@ footer p {
     min-height: 142px;
   }
 
-  #purchasedConsultation {
+  #purchasedConsultation,
+  .structured-consultation {
     min-height: 380px;
   }
 
