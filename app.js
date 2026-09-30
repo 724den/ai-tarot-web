@@ -5,7 +5,7 @@ const freeRequest = `【依頼】
 無料鑑定をお願いします。`;
 
 const detailedRequest = `【依頼】
-有料詳細鑑定をお願いします。`;
+「相手の本音・詳細恋愛鑑定」をお願いします。`;
 
 const detailedThemes = [
   "相手の今の気持ち",
@@ -124,40 +124,64 @@ ${freeRequest}`;
 
 const consultationFields = [
   {
+    key: "basePurchaserName",
+    label: "① BASEで購入したお名前",
+    pattern: /^①\s*BASEで購入したお名前\s*[：:]\s*(.*)$/i,
+    required: true,
+  },
+  {
     key: "nickname",
-    label: "①ニックネーム",
-    pattern: /^①\s*ニックネーム\s*[：:]\s*(.*)$/,
+    label: "② ニックネーム",
+    pattern: /^②\s*ニックネーム\s*[：:]\s*(.*)$/,
     required: true,
   },
   {
     key: "relationship",
-    label: "②相手との関係",
-    pattern: /^②\s*相手との関係\s*[：:]\s*(.*)$/,
+    label: "③ お相手との関係",
+    pattern: /^③\s*お相手との関係\s*[：:]\s*(.*)$/,
     required: true,
   },
   {
     key: "mainQuestion",
-    label: "③一番知りたいこと",
-    pattern: /^③\s*一番知りたいこと\s*[：:]\s*(.*)$/,
+    label: "④ 今いちばん知りたいこと",
+    pattern: /^④\s*今いちばん知りたいこと\s*[：:]\s*(.*)$/,
     required: true,
   },
   {
     key: "recentSituation",
-    label: "④最近の状況",
-    pattern: /^④\s*最近の状況\s*[：:]\s*(.*)$/,
+    label: "⑤ 最近の状況",
+    pattern: /^⑤\s*最近の状況\s*[：:]\s*(.*)$/,
     required: true,
   },
   {
     key: "consultantBirthdate",
-    label: "⑤あなたの生年月日",
-    pattern: /^⑤\s*あなたの生年月日\s*[：:]\s*(.*)$/,
+    label: "⑥ あなたの生年月日",
+    pattern: /^⑥\s*あなたの生年月日\s*[：:]\s*(.*)$/,
     required: true,
   },
   {
     key: "partnerBirthdate",
-    label: "⑥相手の生年月日",
-    pattern: /^⑥\s*相手の生年月日\s*[：:]\s*(.*)$/,
-    required: false,
+    label: "⑦ お相手の生年月日",
+    pattern: /^⑦\s*お相手の生年月日\s*[：:]\s*(.*)$/,
+    required: true,
+  },
+  {
+    key: "history",
+    label: "⑧ これまでの経緯",
+    pattern: /^⑧\s*これまでの経緯\s*[：:]\s*(.*)$/,
+    required: true,
+  },
+  {
+    key: "recentBehavior",
+    label: "⑨ お相手の最近の具体的な言動",
+    pattern: /^⑨\s*お相手の最近の具体的な言動\s*[：:]\s*(.*)$/,
+    required: true,
+  },
+  {
+    key: "desiredFuture",
+    label: "⑩ 今後、お相手とどうなっていきたいか",
+    pattern: /^⑩\s*今後、お相手とどうなっていきたいか\s*[：:]\s*(.*)$/,
+    required: true,
   },
 ];
 
@@ -195,7 +219,7 @@ function normalizeBirthdate(value) {
   return `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
 }
 
-// ①〜⑥の見出しを探し、次の見出しまでを1つの回答として読み取ります。
+// ①〜⑩の見出しを探し、次の見出しまでを1つの回答として読み取ります。
 function parsePurchasedConsultation(text) {
   const values = Object.fromEntries(consultationFields.map((field) => [field.key, ""]));
   let currentKey = null;
@@ -225,11 +249,11 @@ function parsePurchasedConsultation(text) {
   const invalidDates = [];
 
   if (values.consultantBirthdate && consultantBirthdate === null) {
-    invalidDates.push("⑤あなたの生年月日");
+    invalidDates.push("⑥ あなたの生年月日");
   }
 
   if (values.partnerBirthdate && partnerBirthdate === null) {
-    invalidDates.push("⑥相手の生年月日");
+    invalidDates.push("⑦ お相手の生年月日");
   }
 
   return {
@@ -274,12 +298,16 @@ function createDetailedResult(formData, cards) {
     : null;
 
   const consultationText = `【相談内容】
+BASEで購入したお名前：${formData.basePurchaserName}
 ニックネーム：${formData.nickname}
-相手との関係：${formData.relationship}
-一番知りたいこと：${formData.mainQuestion}
+お相手との関係：${formData.relationship}
+今いちばん知りたいこと：${formData.mainQuestion}
 最近の状況：${formData.recentSituation}
-相談者の生年月日：${formatBirthdate(formData.consultantBirthdate)}
-相手の生年月日：${formatBirthdate(formData.partnerBirthdate)}`;
+あなたの生年月日：${formatBirthdate(formData.consultantBirthdate)}
+お相手の生年月日：${formatBirthdate(formData.partnerBirthdate)}
+これまでの経緯：${formData.history}
+お相手の最近の具体的な言動：${formData.recentBehavior}
+今後、お相手とどうなっていきたいか：${formData.desiredFuture}`;
 
   const numerologyLines = [
     "【相談者の数秘】",
@@ -392,7 +420,7 @@ detailedForm.addEventListener("submit", (event) => {
   const selectedCards = createCardResults(7);
   showResult(
     createDetailedResult(parsed.data, selectedCards),
-    "詳細7枚＋数秘の結果",
+    "相手の本音・詳細恋愛鑑定結果",
     "DETAILED RESULT",
   );
 });
@@ -402,7 +430,7 @@ purchasedConsultation.addEventListener("input", () => {
   paidCharacterCount.textContent = `${purchasedConsultation.value.length}文字`;
   detailedInputMessage.textContent = purchasedConsultation.value.trim()
     ? "貼り付け内容を確認できます"
-    : "6項目を自動で読み取ります";
+    : "10項目を自動で読み取ります";
   detailedInputMessage.classList.remove("error");
 });
 
